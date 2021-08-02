@@ -38,23 +38,23 @@ public class PersonController {
 	@Autowired
 	PersonService personService;
 	
-	@GetMapping({"/v1","/v2"})
+	@GetMapping({"/v1.0","/v2.0"})
 	public List<PersonDTO>getAllPerson(){
 		return personService.getAllPerson();
 	}
 
-	@GetMapping({"/v1/{id}","v2/{id}"})
+	@GetMapping({"/v1.0/{id}","/v2.0/{id}"})
 	public PersonDTO getPersonById(final @PathVariable Integer id) {
 		return personService.getPersonById(id);
 	}
 	
-	@DeleteMapping({"/v1/{id}","v2/{id}"})
+	@DeleteMapping({"/v1.0/{id}","/v2.0/{id}"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delelePersonById(final @PathVariable Integer id){
 		personService.delelePersonById(id);
 	}
 	
-	@PostMapping({"/v1"})
+	@PostMapping({"/v1.0"})
 	@Deprecated
 	public ResponseEntity<PersonDTO> saveNewPerson(@Valid @RequestBody PersonFormV1 personForm, HttpServletResponse response) {
 		PersonDTO newPerson = personService.saveNewPerson(personForm.mapToPerson(personForm));
@@ -62,21 +62,21 @@ public class PersonController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
 	}
 	
-	@PostMapping({"/v2"})
+	@PostMapping({"/v2.0"})
 	public ResponseEntity<PersonDTO> saveNewPerson(@Valid @RequestBody PersonForm personForm, HttpServletResponse response) {
 		PersonDTO newPerson = personService.saveNewPerson(personForm.mapToPerson(personForm));
 		publisher.publishEvent(new NewResourceEvent(this, response, newPerson.getId())); 
 		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
 	}
 
-	@PutMapping({"/v1/{id}","v2/{id}"})
-	public ResponseEntity<PersonDTO> updatePerson(@RequestBody @Valid PersonForm personForm, @PathVariable Integer id){
+	@PutMapping({"/v1.0/{id}","v2.0/{id}"})
+	public ResponseEntity<PersonDTO> updatePerson(@Valid @RequestBody PersonForm personForm, @PathVariable Integer id){
 		PersonDTO personUpdated = personService.updatePerson(personForm.mapToPerson(personForm), id);
 		return ResponseEntity.ok().body(personUpdated);
 	}
 	
-	@PatchMapping({"/v1/{id}/email","v2/{id}/email"})
-	public ResponseEntity<PersonDTO> updateEmail(@PathVariable Integer id, @RequestBody String newEmail){
+	@PatchMapping({"/v1.0/{id}/email","v2.0/{id}/email"})
+	public ResponseEntity<PersonDTO> updateEmail(@PathVariable Integer id, 	 String newEmail){
 		PersonDTO personUpdated = personService.updatePersonEmail(id, newEmail);
 		return ResponseEntity.ok().body(personUpdated);
 	}

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PersonalDataInformationUtils {
 
@@ -85,5 +87,21 @@ public class PersonalDataInformationUtils {
 	
 	public static String convertFormatDateToString(java.util.Date date){
 		return new SimpleDateFormat("MM-dd-yyyy").format(date);
+	}
+	
+	/**
+	 * validate email, if not filled consider a valid value
+	 * @param email
+	 * @return
+	 */
+	public static boolean validateEmail(String email){
+		if(email ==null  || email.isEmpty()){
+			return true;
+		}
+		String regex = "^(.+)@(.+)$";
+		Pattern pattern = Pattern.compile(regex);  
+		Matcher matcher = pattern.matcher(email); 
+		boolean isValidEmail = matcher.matches();
+		return isValidEmail;
 	}
 }

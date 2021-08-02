@@ -5,9 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import com.stefanini.personaldataregistration.model.Person;
+import com.stefanini.personaldataregistration.utils.PersonalDataInformationUtils;
 
 import br.com.caelum.stella.validation.CPFValidator;
 import lombok.Getter;
@@ -15,27 +16,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class PersonForm {
 
-	@NotNull
+	@NotBlank(message = "Name is mandatory")
 	private String name;
 	private String gender;
 	private String email;
-	@NotNull
+	@NotBlank(message = "BirthdayDate is mandatory")
 	private String birthdayDate;
 	private String nationality;
 	private String placeOfBirth;
-	@NotNull
+	@NotBlank(message = "Document is mandatory")
 	private String document;
-	@NotNull
+	@NotBlank(message = "Address is mandatory")
 	private String address;
+	
 	public Person mapToPerson(PersonForm personForm) {
 		return new Person(
 							null, 
 							personForm.getName(),
 							personForm.getGender(),
-							personForm.getEmail(),
+							isValidEmail(personForm.getEmail()),
 							isDateValid(personForm.getBirthdayDate()),
 							personForm.getNationality(),
 							personForm.getPlaceOfBirth(),
@@ -72,5 +73,18 @@ public class PersonForm {
 			throw new DateTimeParseException("Invalid Birthday date", null, 0);
 		}
 	}
-
+	
+	/**
+	 *  validate email 
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public static String isValidEmail(String email){
+		if(PersonalDataInformationUtils.validateEmail(email)){
+			return email;
+		}else {
+			throw new RuntimeException("Invalid Email");
+		}
+	}
 }
