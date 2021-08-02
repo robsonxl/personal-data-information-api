@@ -13,13 +13,13 @@ public class NewResourceEvent  extends ApplicationEvent {
 
 	private static final long serialVersionUID = 1L;
 	
-	public NewResourceEvent(Object source, HttpServletResponse response, Integer id) { 
+	public NewResourceEvent(Object source, HttpServletResponse response, Long id) { 
 		super(source);
 		this.setResponse(response);
 		this.setId(id);
 	}
 	
 	private HttpServletResponse response;
-	private Integer id;
+	private Long id;
 
 }

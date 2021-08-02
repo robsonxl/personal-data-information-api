@@ -14,11 +14,11 @@ public class NewResourceEventListener implements ApplicationListener<NewResource
 	@Override
 	public void onApplicationEvent(NewResourceEvent newResourceEvent) {
 		HttpServletResponse response = newResourceEvent.getResponse();
-		Integer id = newResourceEvent.getId();
+		Long id = newResourceEvent.getId();
 		addHeaderLocation(response, id);
 	}
 
-	private void addHeaderLocation(HttpServletResponse response, Integer id) {
+	private void addHeaderLocation(HttpServletResponse response, Long id) {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(
 				 id).toUri();
 		 response.setHeader("Location",uri.toASCIIString());

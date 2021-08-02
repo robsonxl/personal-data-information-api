@@ -3,6 +3,7 @@ package com.stefanini.personaldataregistration.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -23,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stefanini.personaldataregistration.dto.PersonDTO;
 import com.stefanini.personaldataregistration.event.NewResourceEvent;
 import com.stefanini.personaldataregistration.form.PersonForm;
+import com.stefanini.personaldataregistration.form.PersonFormV1;
 import com.stefanini.personaldataregistration.service.PersonService;
-import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -37,38 +38,46 @@ public class PersonController {
 	@Autowired
 	PersonService personService;
 	
-	@GetMapping
+	@GetMapping({"/v1","/v2"})
 	public List<PersonDTO>getAllPerson(){
 		return personService.getAllPerson();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping({"/v1/{id}","v2/{id}"})
 	public PersonDTO getPersonById(final @PathVariable Integer id) {
 		return personService.getPersonById(id);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping({"/v1/{id}","v2/{id}"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delelePersonById(final @PathVariable Integer id){
 		personService.delelePersonById(id);
 	}
 	
-	@PostMapping
+	@PostMapping({"/v1"})
+	@Deprecated
+	public ResponseEntity<PersonDTO> saveNewPerson(@Valid @RequestBody PersonFormV1 personForm, HttpServletResponse response) {
+		PersonDTO newPerson = personService.saveNewPerson(personForm.mapToPerson(personForm));
+		publisher.publishEvent(new NewResourceEvent(this, response, newPerson.getId())); 
+		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
+	}
+	
+	@PostMapping({"/v2"})
 	public ResponseEntity<PersonDTO> saveNewPerson(@Valid @RequestBody PersonForm personForm, HttpServletResponse response) {
 		PersonDTO newPerson = personService.saveNewPerson(personForm.mapToPerson(personForm));
 		publisher.publishEvent(new NewResourceEvent(this, response, newPerson.getId())); 
 		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping({"/v1/{id}","v2/{id}"})
 	public ResponseEntity<PersonDTO> updatePerson(@RequestBody @Valid PersonForm personForm, @PathVariable Integer id){
 		PersonDTO personUpdated = personService.updatePerson(personForm.mapToPerson(personForm), id);
 		return ResponseEntity.ok().body(personUpdated);
 	}
 	
-	@PatchMapping("{id}/status")
+	@PatchMapping({"/v1/{id}/email","v2/{id}/email"})
 	public ResponseEntity<PersonDTO> updateEmail(@PathVariable Integer id, @RequestBody String newEmail){
-		PersonDTO personUpdated = personService.updateEmail(id, newEmail);
+		PersonDTO personUpdated = personService.updatePersonEmail(id, newEmail);
 		return ResponseEntity.ok().body(personUpdated);
 	}
 	

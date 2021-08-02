@@ -7,5 +7,8 @@ import com.stefanini.personaldataregistration.model.Person;
 
 @Repository
 public interface PersonRepostory extends MongoRepository<Person, Integer> {
+	
+	Person findByDocument(String document);
+
 
 }

@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class PersonForm {
+public class PersonFormV1 {
 
 	@NotNull
 	private String name;
@@ -28,9 +28,8 @@ public class PersonForm {
 	private String placeOfBirth;
 	@NotNull
 	private String document;
-	@NotNull
-	private String address;
-	public Person mapToPerson(PersonForm personForm) {
+
+	public Person mapToPerson(PersonFormV1 personForm) {
 		return new Person(
 							null, 
 							personForm.getName(),
