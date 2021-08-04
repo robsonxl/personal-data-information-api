@@ -10,7 +10,7 @@ Run project
 
 3-) run docker composer: docker-compose up --force-recreate
 
-4-) Use postman import postman collection  to get acess to endpoints
+4-) Use postman to import postman collection  to get acess to endpoints : Personal-Data-Information-API.postman_collection.json
 
 5-) swaager: http://localhost:8080/api/swagger-ui.html
 
