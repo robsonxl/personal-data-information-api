@@ -61,6 +61,11 @@ public class PersonService {
 		
 	}
 	
+	public PersonDTO getPersonByDocumentId(String document){
+		Person person = personRepostory.findByDocument(document);;
+		return new PersonDTO(person);
+	}
+	
 	/**
 	 * Save new person 
 	 * @param person

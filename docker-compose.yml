@@ -1,0 +1,48 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    hostname: mongo
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGODB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=personal-data-infromation
+    volumes:
+      - /data/db/
+      - /var/log/mongodb/
+      - /docker-entrypoint-initdb.d/
+    networks:
+      - main-network
+    command: ["--bind_ip", "0.0.0.0"]
+    
+  web:
+    build: # "context" and "dockerfile" fields have to be under "build"
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: personal-data-information-api
+    restart: on-failure
+    depends_on:
+      - mongo
+    ports:
+      - 8080:8080
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_APPLICATION_NAME=personal-data-information-api
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_USERNAME=mongoadmin
+      - SPRING_DATA_MONGODB_PASSWORD=secret
+      - SPRING_DATA_MONGODB_DATABASE=personal-data-infromation
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    external:
+      name: stafanini-net

@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-	
+
 	 @Override
 	    protected void configure(HttpSecurity http) throws Exception 
 	    {
@@ -28,5 +28,4 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 	            .password("{noop}12345")
 	            .roles("USER");
 	    }
-
 }

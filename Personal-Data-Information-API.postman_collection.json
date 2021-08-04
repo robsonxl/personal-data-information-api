@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail.com\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/2017\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"23927568058\"\n}",
+							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail.com\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/2017\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"31819278050\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -117,7 +117,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"3\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/1990\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"46891088038\"\n}",
+							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/1990\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"46891088038\",\n\t\"address\":\"Rua teste\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,7 +260,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t \n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail.com\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/2017\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"01949900010\",\n\t\"address\":\"Rua teste\",\n\t\"name\":\"Robson\"\n}",
+							"raw": "{\n\t \n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail.com\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/2017\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"91728229022\",\n\t\"address\":\"Rua teste\",\n\t\"name\":\"Robson\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"4\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/1990\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"46891088038\"\n}",
+							"raw": "{\n\t\"name\":\"1\",\n\t\"gender\":\"1\",\n\t\"email\":\"teste@gmail\",\n\t\"nationality\":\"18\",\n\t\"birthdayDate\":\"26/03/1990\",\n\t\"placeOfBirth\":\"3\",\n\t\"document\":\"46891088038\",\n\t\"address\":\"rua teste\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -349,7 +349,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/person/v2.0/6",
+							"raw": "localhost:8080/api/person/v2.0/1",
 							"host": [
 								"localhost"
 							],
@@ -358,7 +358,7 @@
 								"api",
 								"person",
 								"v2.0",
-								"6"
+								"1"
 							]
 						}
 					},

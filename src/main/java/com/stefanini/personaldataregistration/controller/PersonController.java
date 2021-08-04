@@ -27,7 +27,7 @@ import com.stefanini.personaldataregistration.form.PersonForm;
 import com.stefanini.personaldataregistration.form.PersonFormV1;
 import com.stefanini.personaldataregistration.service.PersonService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8085")
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -47,6 +47,12 @@ public class PersonController {
 	public PersonDTO getPersonById(final @PathVariable Integer id) {
 		return personService.getPersonById(id);
 	}
+	
+	@GetMapping({"/document/v1.0/{document}","/document/v2.0/{document}"})
+	public PersonDTO getPersonByDocumentId(final @PathVariable String document) {
+		return personService.getPersonByDocumentId(document);
+	}
+	
 	
 	@DeleteMapping({"/v1.0/{id}","/v2.0/{id}"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
